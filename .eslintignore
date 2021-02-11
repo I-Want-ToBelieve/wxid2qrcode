@@ -1,6 +1,0 @@
-# production
-node_modules/
-build/
-public/
-mock/
-*.js
