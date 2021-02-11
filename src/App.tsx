@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useCallback, useMemo, useState } from 'react'
+import logo from './logo.svg'
+import appreciate from './appreciate.jpg'
+import QRCode from 'qrcode.react'
+import './App.scss'
 
-function App() {
+const App: React.FC = () => {
+  const [wxid, setWxid] = useState('')
+  const src = useMemo(() => `weixin://contacts/profile/${wxid}`, [wxid])
+
+  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const wxid = event.target.value
+    setWxid(wxid)
+    console.log('wxid', wxid)
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    // see https://codepen.io/FloatingShuYin/pen/oNYYXEg
+    <>
+      <div className="container">
+        <div>
+          <div className="appreciate">
+            <img src={appreciate} alt="" width="250" height="250" />
+          </div>
+          <div className="webflow-style-input">
+            <input
+              className=""
+              type="email"
+              placeholder="请输入要生成微信二维码的 wxid"
+              autoFocus
+              value={wxid}
+              onChange={onChange}
+            ></input>
+
+            <div className="qrcode">
+              {wxid !== '' && <QRCode value={src} />}{' '}
+            </div>
+
+            {/* <!--     <button type="submit"><i className="icon ion-android-arrow-forward"></i></button> --> */}
+          </div>
+        </div>
+      </div>
+    </>
+  )
 }
 
-export default App;
+export default App
