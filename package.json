@@ -12,7 +12,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "yarn lint --fix",
-    "lint:staged": "yarn lint-staged"
+    "lint:staged": "yarn lint-staged",
+    "one": "git add . && git commit -m \"update\" && git push && yarn deploy"
   },
   "husky": {
     "hooks": {
